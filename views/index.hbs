@@ -1,0 +1,11 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+<form action="">
+<label for="selectDatabase"></label>
+<select name="selectDatabase" id="selectDatabase">
+    {{#each db}}
+     <option value="{{this}}">{{this}}</option>
+    {{/each}}
+</select>
+</form>
+<script src="/javascripts/main.js"></script>
