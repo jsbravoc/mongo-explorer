@@ -131,86 +131,87 @@ const updateDocuments = () => {
   createButton.style.display = "initial";
   tableHead.innerHTML = "";
   tableBody.innerHTML = "";
-  
+
   fetch(window.location.href + "/" + database + "/collections/" + collection)
     .then(response => response.json())
     .then(data => {
       let attributes = [];
       if (data && data[0]) {
         attributes = Object.getOwnPropertyNames(data[0]);
-      } else {
-        console.log("sin datos");
-      }
-      let newHead = document.createElement("tr");
-      let tempHead = document.createElement("th");
-      tempHead.innerHTML = "#";
-      newHead.appendChild(tempHead);
-      attributes.forEach(element => {
+        let newHead = document.createElement("tr");
         let tempHead = document.createElement("th");
-        tempHead.innerHTML = element;
+        tempHead.innerHTML = "#";
         newHead.appendChild(tempHead);
-      });
-      let buttonHead = document.createElement("th");
-      buttonHead.innerHTML = "Edit";
-      newHead.appendChild(buttonHead);
+        attributes.forEach(element => {
+          let tempHead = document.createElement("th");
+          tempHead.innerHTML = element;
+          newHead.appendChild(tempHead);
+        });
+        let buttonHead = document.createElement("th");
+        buttonHead.innerHTML = "Edit";
+        newHead.appendChild(buttonHead);
 
-      buttonHead = document.createElement("th");
-      buttonHead.innerHTML = "Delete";
-      newHead.appendChild(buttonHead);
-      
-      tableHead.appendChild(newHead);
+        buttonHead = document.createElement("th");
+        buttonHead.innerHTML = "Delete";
+        newHead.appendChild(buttonHead);
 
-      let countObjects = 1;
-      data.forEach(element => {
-        let newRow = document.createElement("tr");
-        newRow.setAttribute("scope", "row");
-        newRow.className = "obj";
-        let tempCell = document.createElement("td");
-        tempCell.innerHTML = countObjects++;
-        newRow.appendChild(tempCell);
-        for (const key in element) {
-          tempCell = document.createElement("td");
-          tempCell.innerHTML = element[key];
-          if (key == "_id")
-            tempCell.className = "MongoDB_id";
+        tableHead.appendChild(newHead);
+
+        let countObjects = 1;
+        data.forEach(element => {
+          let newRow = document.createElement("tr");
+          newRow.setAttribute("scope", "row");
+          newRow.className = "obj";
+          let tempCell = document.createElement("td");
+          tempCell.innerHTML = countObjects++;
           newRow.appendChild(tempCell);
-        }
+          for (const key in element) {
+            tempCell = document.createElement("td");
+            tempCell.innerHTML = element[key];
+            if (key == "_id")
+              tempCell.className = "MongoDB_id";
+            newRow.appendChild(tempCell);
+          }
 
-        let tempButtonRow = document.createElement("td");
-        let tempButton = document.createElement("button");
-        tempButton.className = "btn btn-light";
-        tempButton.innerHTML += "<span class='fa fa-pencil'></span>";
-        tempButton.onclick = function () {
-          editDocument(this.closest(".obj").querySelector(".MongoDB_id").innerHTML);
-        };
-        tempButtonRow.appendChild(tempButton);
-        newRow.appendChild(tempButtonRow);
+          let tempButtonRow = document.createElement("td");
+          let tempButton = document.createElement("button");
+          tempButton.className = "btn btn-light";
+          tempButton.innerHTML += "<span class='fa fa-pencil'></span>";
+          tempButton.onclick = function () {
+            editDocument(this.closest(".obj").querySelector(".MongoDB_id").innerHTML);
+          };
+          tempButtonRow.appendChild(tempButton);
+          newRow.appendChild(tempButtonRow);
 
-        tempButtonRow = document.createElement("td");
-        tempButton = document.createElement("button");
-        tempButton.className = "btn btn-danger";
-        tempButton.onclick = function () {
-          deleteDocument(this.closest(".obj").querySelector(".MongoDB_id").innerHTML);
-        };
-        tempButton.innerHTML += "<span class='fa fa-trash'></span>";
-        tempButtonRow.appendChild(tempButton);
-        newRow.appendChild(tempButtonRow);
-        tableBody.appendChild(newRow);
-      });
-      if(!datatable)
-      { datatable = $("#tableDocuments").DataTable({
-        responsive: true, 
-        "pageLength": 5,
-        "lengthChange": false, 
-        "searching": false});
+          tempButtonRow = document.createElement("td");
+          tempButton = document.createElement("button");
+          tempButton.className = "btn btn-danger";
+          tempButton.onclick = function () {
+            deleteDocument(this.closest(".obj").querySelector(".MongoDB_id").innerHTML);
+          };
+          tempButton.innerHTML += "<span class='fa fa-trash'></span>";
+          tempButtonRow.appendChild(tempButton);
+          newRow.appendChild(tempButtonRow);
+          tableBody.appendChild(newRow);
+        });
+      } else {
+        console.log("Empty table!");
       }
-      else
-      { datatable = $("#tableDocuments").DataTable({
-        responsive: true, 
-        "pageLength": 5,
-        "lengthChange": false, 
-        "searching": false});
-      datatable.draw();
+      if (!datatable) {
+        datatable = $("#tableDocuments").DataTable({
+          responsive: true,
+          "pageLength": 5,
+          "lengthChange": false,
+          "searching": false
+        });
+      } else {
+        datatable = $("#tableDocuments").DataTable({
+          responsive: true,
+          "pageLength": 5,
+          "lengthChange": false,
+          "searching": false
+        });
+        datatable.draw();
       }
     });
 };

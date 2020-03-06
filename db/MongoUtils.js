@@ -22,8 +22,7 @@ const ObjectId = require("mongodb").ObjectID;
  * @returns {Promise} Promise which will return an object with the databases.
  */
 exports.getDatabasesPromise = (uri) => {
-  if(!uri || ! (uri instanceof String))
-  {
+  if (!uri || !(uri instanceof String)) {
     new Error("MongoDB URI cannot be: " + uri);
   }
   const client = new MongoClient(uri, {
@@ -52,12 +51,10 @@ exports.getDatabasesPromise = (uri) => {
  * @returns {Promise} Promise which will return an array of the databases collections.
  */
 exports.getCollectionPromise = (uri, dbName) => {
-  if(!uri || ! (uri instanceof String))
-  {
+  if (!uri || !(uri instanceof String)) {
     new Error("MongoDB URI cannot be: " + uri);
   }
-  if(!dbName || ! (dbName instanceof String))
-  {
+  if (!dbName || !(dbName instanceof String)) {
     new Error("Database name cannot be: " + dbName);
   }
   const client = new MongoClient(uri, {
@@ -88,16 +85,13 @@ exports.getCollectionPromise = (uri, dbName) => {
  */
 exports.getDocumentsPromise = (uri, dbName, collectionName) => {
 
-  if(!uri || ! (uri instanceof String))
-  {
+  if (!uri || !(uri instanceof String)) {
     new Error("MongoDB URI cannot be: " + uri);
   }
-  if(!dbName || ! (dbName instanceof String))
-  {
+  if (!dbName || !(dbName instanceof String)) {
     new Error("Database name cannot be: " + dbName);
   }
-  if(!collectionName || ! (collectionName instanceof String))
-  {
+  if (!collectionName || !(collectionName instanceof String)) {
     new Error("Collection name cannot be: " + collectionName);
   }
   const client = new MongoClient(uri, {
@@ -113,7 +107,9 @@ exports.getDocumentsPromise = (uri, dbName, collectionName) => {
         .collection(collectionName)
         .find({})
         .limit(20)
-        .sort({_id:-1})
+        .sort({
+          _id: -1
+        })
         .toArray()
     ).catch(err => new Error(err));
 };
@@ -133,20 +129,16 @@ exports.getDocumentsPromise = (uri, dbName, collectionName) => {
  */
 exports.findAndDeleteOnePromise = (uri, dbName, collectionName, _id) => {
 
-  if(!uri || ! (uri instanceof String))
-  {
+  if (!uri || !(uri instanceof String)) {
     new Error("MongoDB URI cannot be: " + uri);
   }
-  if(!dbName || ! (dbName instanceof String))
-  {
+  if (!dbName || !(dbName instanceof String)) {
     new Error("Database name cannot be: " + dbName);
   }
-  if(!collectionName || ! (collectionName instanceof String))
-  {
+  if (!collectionName || !(collectionName instanceof String)) {
     new Error("Collection name cannot be: " + collectionName);
   }
-  if(!_id || ! (_id instanceof String))
-  {
+  if (!_id || !(_id instanceof String)) {
     new Error("The unique _id of the document cannot be: " + _id);
   }
   const client = new MongoClient(uri, {
@@ -160,7 +152,9 @@ exports.findAndDeleteOnePromise = (uri, dbName, collectionName, _id) => {
       client
         .db(dbName)
         .collection(collectionName)
-        .findOneAndDelete({ "_id": new ObjectId(_id)})
+        .findOneAndDelete({
+          "_id": new ObjectId(_id)
+        })
     ).catch(err => new Error(err));
 };
 
@@ -181,20 +175,16 @@ exports.findAndDeleteOnePromise = (uri, dbName, collectionName, _id) => {
  */
 exports.findAndUpdateOnePromise = (uri, dbName, collectionName, _id, newObject) => {
 
-  if(!uri || ! (uri instanceof String))
-  {
+  if (!uri || !(uri instanceof String)) {
     new Error("MongoDB URI cannot be: " + uri);
   }
-  if(!dbName || ! (dbName instanceof String))
-  {
+  if (!dbName || !(dbName instanceof String)) {
     new Error("Database name cannot be: " + dbName);
   }
-  if(!collectionName || ! (collectionName instanceof String))
-  {
+  if (!collectionName || !(collectionName instanceof String)) {
     new Error("Collection name cannot be: " + collectionName);
   }
-  if(!_id || ! (_id instanceof String))
-  {
+  if (!_id || !(_id instanceof String)) {
     new Error("The unique _id of the document cannot be: " + _id);
   }
   const client = new MongoClient(uri, {
@@ -208,7 +198,11 @@ exports.findAndUpdateOnePromise = (uri, dbName, collectionName, _id, newObject) 
       client
         .db(dbName)
         .collection(collectionName)
-        .findOneAndUpdate({ "_id": new ObjectId(_id)}, { $set: newObject})
+        .findOneAndUpdate({
+          "_id": new ObjectId(_id)
+        }, {
+          $set: newObject
+        })
     ).catch(err => new Error(err));
 };
 
@@ -227,20 +221,16 @@ exports.findAndUpdateOnePromise = (uri, dbName, collectionName, _id, newObject) 
  */
 exports.findOnePromise = (uri, dbName, collectionName, _id) => {
 
-  if(!uri || ! (uri instanceof String))
-  {
+  if (!uri || !(uri instanceof String)) {
     new Error("MongoDB URI cannot be: " + uri);
   }
-  if(!dbName || ! (dbName instanceof String))
-  {
+  if (!dbName || !(dbName instanceof String)) {
     new Error("Database name cannot be: " + dbName);
   }
-  if(!collectionName || ! (collectionName instanceof String))
-  {
+  if (!collectionName || !(collectionName instanceof String)) {
     new Error("Collection name cannot be: " + collectionName);
   }
-  if(!_id || ! (_id instanceof String))
-  {
+  if (!_id || !(_id instanceof String)) {
     new Error("The unique _id of the document cannot be: " + _id);
   }
   const client = new MongoClient(uri, {
@@ -254,7 +244,9 @@ exports.findOnePromise = (uri, dbName, collectionName, _id) => {
       client
         .db(dbName)
         .collection(collectionName)
-        .find({ "_id": new ObjectId(_id)})
+        .find({
+          "_id": new ObjectId(_id)
+        })
         .toArray()
     ).catch(err => new Error(err));
 };
@@ -273,16 +265,13 @@ exports.findOnePromise = (uri, dbName, collectionName, _id) => {
  */
 exports.createOneDocumentPromise = (uri, dbName, collectionName, object) => {
 
-  if(!uri || ! (uri instanceof String))
-  {
+  if (!uri || !(uri instanceof String)) {
     new Error("MongoDB URI cannot be: " + uri);
   }
-  if(!dbName || ! (dbName instanceof String))
-  {
+  if (!dbName || !(dbName instanceof String)) {
     new Error("Database name cannot be: " + dbName);
   }
-  if(!collectionName || ! (collectionName instanceof String))
-  {
+  if (!collectionName || !(collectionName instanceof String)) {
     new Error("Collection name cannot be: " + collectionName);
   }
 
