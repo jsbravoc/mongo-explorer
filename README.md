@@ -1,9 +1,9 @@
-# Rentsy
+# Mongo Explorer
 https://my-mongo-explorer.herokuapp.com/
 
 Web application to visualize a MongoDB database and do CRUD operations within it.
 
-**note:** @john-guerra para el parcial hice la opción 2B+ (Desplegado, con crear, modificar, borrar registros y paginación) para el viernes.
+**note:** @john-guerra para el parcial hice la opción 2B (Desplegado, con crear, modificar, borrar registros y paginación).
 
 ### Demo
 
