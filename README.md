@@ -25,6 +25,16 @@ All the listed prerrequisites must be installed in order to use the application.
     $ npm install
     ```
 
+
+### Configuration
+* If the MongoDB database URI is from MongoDB Atlas, remember to open the ports to all ips (or at least https://my-mongo-explorer.herokuapp.com/ ip)
+    Steps:
+        1. Open the MongoDB Atlas dashboard. 
+        2. In the side panel look for Security -> Network Access.
+        3. Click 'Add IP Address'
+        4. Allow '0.0.0.0/0' ip (all connections) 
+
+    
 ### Running the application
 * Before starting the application make sure you have mongodb installed and running, if it doesn't run it using this command.
     ``` bash
