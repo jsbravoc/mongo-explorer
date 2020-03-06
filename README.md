@@ -2,6 +2,7 @@
 https://my-mongo-explorer.herokuapp.com/
 
 Web application to visualize a MongoDB database and do CRUD operations within it.
+
 **note:** @john-guerra Para el parcial hice la opción 2B+ (Desplegado, con crear, modificar, borrar registros y paginación) para el viernes.
 
 ### Demo
