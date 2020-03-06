@@ -39,7 +39,19 @@ All the listed prerrequisites must be installed in order to use the application.
         
         * Allow '0.0.0.0/0' ip (all connections) 
         
+* Moreover, remember to use a user with admin privileges:
 
+    **Steps:**
+    
+        * Open the MongoDB Atlas dashboard. 
+        
+        * In the side panel look for Security -> Database Access.
+        
+        * Click 'Add new user'
+        
+        * Enter a username and a password and remember them.
+        
+        * In Database Database User Privileges choose: Atlas admin.
     
 ### Running the application
 * Before starting the application make sure you have mongodb installed and running, if it doesn't run it using this command.
