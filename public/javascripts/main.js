@@ -121,8 +121,10 @@ const updateCollections = () => {
  * by accesing to its data endpoint.
  */
 const updateDocuments = () => {
-  if (datatable)
+  if (datatable) {
     datatable.destroy();
+    datatable = null;
+  }
   let database = selectDatabase.value;
   let collection = selectCollection.value;
   let tableHead = document.querySelector("#thead");
@@ -194,25 +196,27 @@ const updateDocuments = () => {
           newRow.appendChild(tempButtonRow);
           tableBody.appendChild(newRow);
         });
+        if (!datatable) {
+          datatable = $("#tableDocuments").DataTable({
+            responsive: true,
+            "pageLength": 5,
+            "lengthChange": false,
+            "searching": false
+          });
+        } else {
+          datatable = $("#tableDocuments").DataTable({
+            responsive: true,
+            "pageLength": 5,
+            "lengthChange": false,
+            "searching": false
+          });
+          datatable.draw();
+        }
+        
       } else {
         console.log("Empty table!");
       }
-      if (!datatable) {
-        datatable = $("#tableDocuments").DataTable({
-          responsive: true,
-          "pageLength": 5,
-          "lengthChange": false,
-          "searching": false
-        });
-      } else {
-        datatable = $("#tableDocuments").DataTable({
-          responsive: true,
-          "pageLength": 5,
-          "lengthChange": false,
-          "searching": false
-        });
-        datatable.draw();
-      }
+     
     });
 };
 
