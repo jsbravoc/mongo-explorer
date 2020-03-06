@@ -92,6 +92,7 @@ const selectCollection = document.querySelector("#selectCollection");
 
 //#endregion constants
 
+let datatable = null;
 
 /**
  * @constant updateCollections 
@@ -101,6 +102,7 @@ const selectCollection = document.querySelector("#selectCollection");
  */
 const updateCollections = () => {
   selectCollection.innerHTML = "";
+  selectCollection.innerHTML += "<option value='' selected disabled='true'> -- select an option -- </option>";
   let database = selectDatabase.value;
   fetch(window.location.href + "/" + database + "/collections")
     .then(response => response.json())
@@ -119,7 +121,8 @@ const updateCollections = () => {
  * by accesing to its data endpoint.
  */
 const updateDocuments = () => {
-
+  if (datatable)
+    datatable.destroy();
   let database = selectDatabase.value;
   let collection = selectCollection.value;
   let tableHead = document.querySelector("#thead");
@@ -128,6 +131,7 @@ const updateDocuments = () => {
   createButton.style.display = "initial";
   tableHead.innerHTML = "";
   tableBody.innerHTML = "";
+  
   fetch(window.location.href + "/" + database + "/collections/" + collection)
     .then(response => response.json())
     .then(data => {
@@ -193,12 +197,21 @@ const updateDocuments = () => {
         newRow.appendChild(tempButtonRow);
         tableBody.appendChild(newRow);
       });
-      $("#tableDocuments").DataTable({
+      if(!datatable)
+      { datatable = $("#tableDocuments").DataTable({
         responsive: true, 
-        stateSave: true,  
         "pageLength": 5,
         "lengthChange": false, 
         "searching": false});
+      }
+      else
+      { datatable = $("#tableDocuments").DataTable({
+        responsive: true, 
+        "pageLength": 5,
+        "lengthChange": false, 
+        "searching": false});
+      datatable.draw();
+      }
     });
 };
 
