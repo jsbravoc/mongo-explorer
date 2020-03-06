@@ -31,9 +31,13 @@ All the listed prerrequisites must be installed in order to use the application.
 
     **Steps:**
         * Open the MongoDB Atlas dashboard. 
+        
         * In the side panel look for Security -> Network Access.
+        
         * Click 'Add IP Address'
+        
         * Allow '0.0.0.0/0' ip (all connections) 
+        
 
     
 ### Running the application
