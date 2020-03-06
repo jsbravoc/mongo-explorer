@@ -27,7 +27,7 @@ All the listed prerrequisites must be installed in order to use the application.
 
 
 ### Configuration
-* If the MongoDB database URI is from MongoDB Atlas, remember to open the ports to all ips (or at least https://my-mongo-explorer.herokuapp.com/ ip)
+* If the MongoDB database URI is from MongoDB Atlas, remember to open the ports to all IPs (or at least https://my-mongo-explorer.herokuapp.com/ IP)
 
     **Steps:**
     
