@@ -39,9 +39,12 @@
                 <tbody id="tbody">
                 </tbody>
             </table>
+            <button id="createDocument" class="btn btn-primary" onclick="createDocument();"style="display: none;">Crear registro</button>
         </div>
     </div>
-    <!-- https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=delete-confirmation-modal -->
+</div>
+
+ <!-- https://www.tutorialrepublic.com/codelab.php?topic=bootstrap&file=delete-confirmation-modal -->
     <!-- Delete Modal -->
     <div id="deleteModal" class="modal fade">
         <div class="modal-dialog modal-confirm">
@@ -58,7 +61,7 @@
                     <p>Do you really want to delete this document? This process cannot be undone.</p>
                 </div>
                 <div class="modal-footer">
-                    <form action="/delete/" id="deleteCollectionForm" method="post">
+                    <form action="/delete/" id="deleteDocumentForm" method="post">
                         <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
@@ -73,8 +76,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4>Edit a document</h4>
                 </div>
-                <form id="editCollectionForm" method="POST" action="/delete/">
+                <form id="editDocumentForm" method="POST" action="/update/">
                     <div class="modal-body" id="editModalBody">
                     </div>
                     <div class="modal-footer">
@@ -85,5 +89,24 @@
             </div>
         </div>
     </div>
-</div>
+
+    <!-- Create Modal -->
+    <div id="createModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                       <h4>Create a document</h4>
+                </div>
+                <form id="createDocumentForm" method="POST" action="/create/">
+                    <div class="modal-body" id="createModalBody">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-sucess">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <script src="/javascripts/main.js"></script>

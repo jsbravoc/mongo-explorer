@@ -111,7 +111,10 @@ exports.getDocumentsPromise = (uri, dbName, collectionName) => {
       client
         .db(dbName)
         .collection(collectionName)
-        .find({}).toArray()
+        .find({})
+        .limit(20)
+        .sort({_id:-1})
+        .toArray()
     ).catch(err => new Error(err));
 };
 
@@ -253,5 +256,46 @@ exports.findOnePromise = (uri, dbName, collectionName, _id) => {
         .collection(collectionName)
         .find({ "_id": new ObjectId(_id)})
         .toArray()
+    ).catch(err => new Error(err));
+};
+
+/**
+ * @function createOneDocumentPromise
+ * @alias module:MongoUtils.createOneDocumentPromise
+ * @param {string} uri MongoDB URI to connect to the database.
+ * @param {string} dbName Name of the database to query.
+ * @param {string} collectionName Name of the collection to query its documents.
+ * @param {Object} object The object to be inserted in the database.
+ * @throws {Error} if uri parameter is null, undefined or is not a string.
+ * @throws {Error} if the colection name parameter is null, undefined or is not a string.
+ * @throws {Error} if the connection could be established.
+ * @returns {Promise} Promise which will return the object.
+ */
+exports.createOneDocumentPromise = (uri, dbName, collectionName, object) => {
+
+  if(!uri || ! (uri instanceof String))
+  {
+    new Error("MongoDB URI cannot be: " + uri);
+  }
+  if(!dbName || ! (dbName instanceof String))
+  {
+    new Error("Database name cannot be: " + dbName);
+  }
+  if(!collectionName || ! (collectionName instanceof String))
+  {
+    new Error("Collection name cannot be: " + collectionName);
+  }
+
+  const client = new MongoClient(uri, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+  });
+  return client
+    .connect()
+    .then(client =>
+      client
+        .db(dbName)
+        .collection(collectionName)
+        .insertOne(object)
     ).catch(err => new Error(err));
 };

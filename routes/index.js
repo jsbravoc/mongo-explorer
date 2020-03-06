@@ -56,4 +56,9 @@ router.post("/:connection/:database/collections/:collection/update/:_id", functi
     .then(res.redirect(req.get("referer")));
 });
 
+router.post("/:connection/:database/collections/:collection/create/", function(req, res) {
+  db.createOneDocumentPromise(decodeURIComponent(req.params.connection), req.params.database, req.params.collection, req.body)
+    .then(res.redirect(req.get("referer")));
+});
+
 module.exports = router;
