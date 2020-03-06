@@ -11,7 +11,6 @@
 /**
  * @constant deleteModal 
  * @type {object}
- * @default
  * Constant pointer to DOM delete modal.
  */
 const deleteModal = document.querySelector("#deleteModal");
@@ -19,7 +18,6 @@ const deleteModal = document.querySelector("#deleteModal");
 /**
  * @constant deleteModalJS 
  * @type {object}
- * @default
  * Bootstrap Native modal initialization to @constant deleteModal. 
  * Used to avoid JQuery usage as recommended by John Guerra.
  */
@@ -30,7 +28,6 @@ const deleteModalJS = new Modal(deleteModal);
 /**
  * @constant editModal 
  * @type {object}
- * @default
  * Constant pointer to DOM edit modal.
  */
 const editModal = document.querySelector("#editModal");
@@ -38,7 +35,6 @@ const editModal = document.querySelector("#editModal");
 /**
  * @constant editModallJS 
  * @type {object}
- * @default
  * Bootstrap Native modal initialization to @constant editModal. 
  * Used to avoid JQuery usage as recommended by John Guerra.
  */
@@ -48,7 +44,6 @@ const editModallJS = new Modal(editModal);
 /**
  * @constant createModal 
  * @type {object}
- * @default
  * Constant pointer to DOM create modal.
  */
 const createModal = document.querySelector("#createModal");
@@ -56,7 +51,6 @@ const createModal = document.querySelector("#createModal");
 /**
  * @constant createModalJS 
  * @type {object}
- * @default
  * Bootstrap Native modal initialization to @constant createModal. 
  * Used to avoid JQuery usage as recommended by John Guerra.
  */
@@ -69,7 +63,6 @@ const createModalJS = new Modal(createModal);
 /**
  * @constant selectDatabase 
  * @type {object}
- * @default
  * Constant pointer to select input with id = selectDatabase
  */
 const selectDatabase = document.querySelector("#selectDatabase");
@@ -77,7 +70,6 @@ const selectDatabase = document.querySelector("#selectDatabase");
 /**
  * @constant tableDocuments 
  * @type {object}
- * @default
  * Constant pointer to the table that shows the documents of a collection.
  */
 const tableDocuments = document.querySelector("#tableDocuments");
@@ -85,14 +77,20 @@ const tableDocuments = document.querySelector("#tableDocuments");
 /**
  * @constant selectCollection 
  * @type {object}
- * @default
  * Constant pointer to select input with id = selectCollection
  */
 const selectCollection = document.querySelector("#selectCollection");
 
 //#endregion constants
 
+/**
+ * @var datatable 
+ * @type {object}
+ * Variable used to load/destroy the datatable dynamically.
+ */
 let datatable = null;
+
+//#region CRUD Operations
 
 /**
  * @constant updateCollections 
@@ -329,6 +327,8 @@ const deleteDocument = (_id) => {
   deleteModalJS.show();
 };
 
+//#endregion CRUD Operations
+
 /**
  * @constant changeURI 
  * @type {function}
@@ -343,7 +343,7 @@ const changeURI = () => {
   }
 };
 
-
+//#region Listeners 
 /**
  * Updates the collection based on input @constant selectDatabase.
  * @listens change in input.
@@ -355,3 +355,5 @@ selectDatabase.addEventListener("change", updateCollections);
  * @listens change in input.
  */
 selectCollection.addEventListener("change", updateDocuments);
+
+//#endregion Listeners 

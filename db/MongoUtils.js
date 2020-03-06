@@ -7,10 +7,14 @@
 /**
  * @constant MongoClient 
  * @type {NodeModule}
- * @default
- * Loads MongoClient module used to access the MongoDB database.
+ * Loads MongoClient module used to access the MongoDB database
  */
 const MongoClient = require("mongodb").MongoClient;
+/**
+ * @constant ObjectId 
+ * @type {NodeModule}
+ * Loads ObjectId module to find/update by _id.
+ */
 const ObjectId = require("mongodb").ObjectID;
 
 /**
@@ -81,7 +85,7 @@ exports.getCollectionPromise = (uri, dbName) => {
  * @param {string} collectionName Name of the collection to query its documents.
  * @throws {Error} if uri param is null, undefined or is not a string.
  * @throws {Error} if the connection could be established.
- * @returns {Promise} Promise which will return an array with the documents of the collection.
+ * @returns {Promise} A Promise that will return an array with the documents of the collection.
  */
 exports.getDocumentsPromise = (uri, dbName, collectionName) => {
 
@@ -125,7 +129,7 @@ exports.getDocumentsPromise = (uri, dbName, collectionName) => {
  * @throws {Error} if the colection name parameter is null, undefined or is not a string.
  * @throws {Error} if the unique _id parameter is null, undefined or is not a string.
  * @throws {Error} if the connection could be established.
- * @returns {Promise} Promise which will return the document deleted.
+ * @returns {Promise} A Promise that will return the document deleted.
  */
 exports.findAndDeleteOnePromise = (uri, dbName, collectionName, _id) => {
 
@@ -171,7 +175,7 @@ exports.findAndDeleteOnePromise = (uri, dbName, collectionName, _id) => {
  * @throws {Error} if the colection name parameter is null, undefined or is not a string.
  * @throws {Error} if the unique _id parameter is null, undefined or is not a string.
  * @throws {Error} if the connection could be established.
- * @returns {Promise} Promise which will return the non updated object.
+ * @returns {Promise} A Promise that will return the non updated object.
  */
 exports.findAndUpdateOnePromise = (uri, dbName, collectionName, _id, newObject) => {
 
@@ -217,7 +221,7 @@ exports.findAndUpdateOnePromise = (uri, dbName, collectionName, _id, newObject) 
  * @throws {Error} if the colection name parameter is null, undefined or is not a string.
  * @throws {Error} if the unique _id parameter is null, undefined or is not a string.
  * @throws {Error} if the connection could be established.
- * @returns {Promise} Promise which will return the object.
+ * @returns {Promise} A Promise that will return the object.
  */
 exports.findOnePromise = (uri, dbName, collectionName, _id) => {
 
@@ -261,7 +265,7 @@ exports.findOnePromise = (uri, dbName, collectionName, _id) => {
  * @throws {Error} if uri parameter is null, undefined or is not a string.
  * @throws {Error} if the colection name parameter is null, undefined or is not a string.
  * @throws {Error} if the connection could be established.
- * @returns {Promise} Promise which will return the object.
+ * @returns {Promise} A Promise that will return the object.
  */
 exports.createOneDocumentPromise = (uri, dbName, collectionName, object) => {
 
