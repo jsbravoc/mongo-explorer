@@ -102,7 +102,7 @@ let datatable = null;
  */
 const updateCollections = () => {
   selectCollection.innerHTML = "";
-  selectCollection.innerHTML += "<option value='' selected disabled='true'> -- select an option -- </option>";
+  selectCollection.innerHTML += "<option value='' selected='true' disabled='true'> -- select an option -- </option>";
   let database = selectDatabase.value;
   fetch(window.location.href + "/" + database + "/collections")
     .then(response => response.json())

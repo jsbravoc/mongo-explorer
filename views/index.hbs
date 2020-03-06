@@ -24,7 +24,7 @@
 
             <label for="selectDatabase">Database</label>
             <select name="selectDatabase" class="form-control" id="selectDatabase">
-                <option value='' selected disabled='true'> -- select an option -- </option>
+                <option value='' selected="true" disabled='true'> -- select an option -- </option>
                 {{#each databases}}
                 <option value="{{this.name}}">{{this.name}}</option>
                 {{/each}}
