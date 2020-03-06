@@ -30,6 +30,7 @@ All the listed prerrequisites must be installed in order to use the application.
 * If the MongoDB database URI is from MongoDB Atlas, remember to open the ports to all ips (or at least https://my-mongo-explorer.herokuapp.com/ ip)
 
     **Steps:**
+    
         * Open the MongoDB Atlas dashboard. 
         
         * In the side panel look for Security -> Network Access.
