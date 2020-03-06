@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /*!
  * @author Juan Sebastián Bravo <js.bravo@uniandes.edu.co>
  * Fecha 03/05/2020
@@ -136,8 +137,8 @@ const updateDocuments = () => {
       } else {
         console.log("sin datos");
       }
-      let newHead = tableDocuments.insertRow(0);
-      tempHead = document.createElement("th");
+      let newHead = document.createElement("tr");
+      let tempHead = document.createElement("th");
       tempHead.innerHTML = "#";
       newHead.appendChild(tempHead);
       attributes.forEach(element => {
@@ -152,10 +153,12 @@ const updateDocuments = () => {
       buttonHead = document.createElement("th");
       buttonHead.innerHTML = "Delete";
       newHead.appendChild(buttonHead);
+      
+      tableHead.appendChild(newHead);
 
       let countObjects = 1;
       data.forEach(element => {
-        let newRow = tableDocuments.insertRow();
+        let newRow = document.createElement("tr");
         newRow.setAttribute("scope", "row");
         newRow.className = "obj";
         let tempCell = document.createElement("td");
@@ -188,7 +191,14 @@ const updateDocuments = () => {
         tempButton.innerHTML += "<span class='fa fa-trash'></span>";
         tempButtonRow.appendChild(tempButton);
         newRow.appendChild(tempButtonRow);
+        tableBody.appendChild(newRow);
       });
+      $("#tableDocuments").DataTable({
+        responsive: true, 
+        stateSave: true,  
+        "pageLength": 5,
+        "lengthChange": false, 
+        "searching": false});
     });
 };
 
