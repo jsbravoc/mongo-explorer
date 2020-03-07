@@ -2,6 +2,16 @@
     <h1>{{title}}</h1>
     <p>Welcome to {{title}}</p>
 
+{{#if error}}
+<div class="alert alert-danger" role="alert">
+  <strong>Error!</strong> {{error}}
+  <hr>
+   Read how to solve configuration errors at: <a href="{{readme}}" class="alert-link">{{readme}}</a>
+
+  </button>
+</div>
+{{/if}}
+
 
     <div class="row">
         <div class="col-md-6">

@@ -22,7 +22,7 @@ const ObjectId = require("mongodb").ObjectID;
  * @alias module:MongoUtils.getDatabasesPromise
  * @param {string} uri MongoDB URI to connect to the database.
  * @throws {Error} if uri param is null, undefined or is not a string.
- * @throws {Error} if the connection could be established.
+ * @throws {Error} if the connection could not be established.
  * @returns {Promise} Promise which will return an object with the databases.
  */
 exports.getDatabasesPromise = (uri) => {
@@ -41,7 +41,7 @@ exports.getDatabasesPromise = (uri) => {
         .db()
         .admin()
         .listDatabases()
-    ).catch(err => new Error(err));
+    );
 };
 
 /**
@@ -51,7 +51,7 @@ exports.getDatabasesPromise = (uri) => {
  * @param {string} dbName Name of the database to query its collections.
  * @throws {Error} If uri parameter is null, undefined or is not a string.
  * @throws {Error} If dbName parameter is null, undefined or is not a string.
- * @throws {Error} If the connection could be established.
+ * @throws {Error} If the connection could not be established.
  * @returns {Promise} Promise which will return an array of the databases collections.
  */
 exports.getCollectionPromise = (uri, dbName) => {
@@ -74,7 +74,7 @@ exports.getCollectionPromise = (uri, dbName) => {
           .db(dbName)
           .listCollections()
           .toArray()
-    ).catch(err => new Error(err));
+    );
 };
 
 /**
@@ -84,7 +84,7 @@ exports.getCollectionPromise = (uri, dbName) => {
  * @param {string} dbName Name of the database to query.
  * @param {string} collectionName Name of the collection to query its documents.
  * @throws {Error} if uri param is null, undefined or is not a string.
- * @throws {Error} if the connection could be established.
+ * @throws {Error} if the connection could not be established.
  * @returns {Promise} A Promise that will return an array with the documents of the collection.
  */
 exports.getDocumentsPromise = (uri, dbName, collectionName) => {
@@ -110,12 +110,11 @@ exports.getDocumentsPromise = (uri, dbName, collectionName) => {
         .db(dbName)
         .collection(collectionName)
         .find({})
-        .limit(20)
         .sort({
           _id: -1
         })
         .toArray()
-    ).catch(err => new Error(err));
+    );
 };
 
 /**
@@ -128,7 +127,7 @@ exports.getDocumentsPromise = (uri, dbName, collectionName) => {
  * @throws {Error} if uri parameter is null, undefined or is not a string.
  * @throws {Error} if the colection name parameter is null, undefined or is not a string.
  * @throws {Error} if the unique _id parameter is null, undefined or is not a string.
- * @throws {Error} if the connection could be established.
+ * @throws {Error} if the connection could not be established.
  * @returns {Promise} A Promise that will return the document deleted.
  */
 exports.findAndDeleteOnePromise = (uri, dbName, collectionName, _id) => {
@@ -159,7 +158,7 @@ exports.findAndDeleteOnePromise = (uri, dbName, collectionName, _id) => {
         .findOneAndDelete({
           "_id": new ObjectId(_id)
         })
-    ).catch(err => new Error(err));
+    );
 };
 
 
@@ -174,7 +173,7 @@ exports.findAndDeleteOnePromise = (uri, dbName, collectionName, _id) => {
  * @throws {Error} if uri parameter is null, undefined or is not a string.
  * @throws {Error} if the colection name parameter is null, undefined or is not a string.
  * @throws {Error} if the unique _id parameter is null, undefined or is not a string.
- * @throws {Error} if the connection could be established.
+ * @throws {Error} if the connection could not be established.
  * @returns {Promise} A Promise that will return the non updated object.
  */
 exports.findAndUpdateOnePromise = (uri, dbName, collectionName, _id, newObject) => {
@@ -207,7 +206,7 @@ exports.findAndUpdateOnePromise = (uri, dbName, collectionName, _id, newObject) 
         }, {
           $set: newObject
         })
-    ).catch(err => new Error(err));
+    );
 };
 
 /**
@@ -220,7 +219,7 @@ exports.findAndUpdateOnePromise = (uri, dbName, collectionName, _id, newObject) 
  * @throws {Error} if uri parameter is null, undefined or is not a string.
  * @throws {Error} if the colection name parameter is null, undefined or is not a string.
  * @throws {Error} if the unique _id parameter is null, undefined or is not a string.
- * @throws {Error} if the connection could be established.
+ * @throws {Error} if the connection could not be established.
  * @returns {Promise} A Promise that will return the object.
  */
 exports.findOnePromise = (uri, dbName, collectionName, _id) => {
@@ -252,7 +251,7 @@ exports.findOnePromise = (uri, dbName, collectionName, _id) => {
           "_id": new ObjectId(_id)
         })
         .toArray()
-    ).catch(err => new Error(err));
+    );
 };
 
 /**
@@ -264,7 +263,7 @@ exports.findOnePromise = (uri, dbName, collectionName, _id) => {
  * @param {Object} object The object to be inserted in the database.
  * @throws {Error} if uri parameter is null, undefined or is not a string.
  * @throws {Error} if the colection name parameter is null, undefined or is not a string.
- * @throws {Error} if the connection could be established.
+ * @throws {Error} if the connection could not be established.
  * @returns {Promise} A Promise that will return the object.
  */
 exports.createOneDocumentPromise = (uri, dbName, collectionName, object) => {
@@ -290,5 +289,5 @@ exports.createOneDocumentPromise = (uri, dbName, collectionName, object) => {
         .db(dbName)
         .collection(collectionName)
         .insertOne(object)
-    ).catch(err => new Error(err));
+    );
 };

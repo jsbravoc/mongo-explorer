@@ -43,6 +43,11 @@ router.get("/:connection", function (req, res) {
       title: "Mongo Explorer",
       databases: db.databases,
       actualURI: decodeURIComponent(req.params.connection)
+    }))
+    .catch(err => res.render("index", {
+      title: "Mongo Explorer",
+      error: err,
+      readme: "https://github.com/jsbravo-sw/mongo-explorer/blob/master/README.md"
     }));
 
 });
@@ -53,7 +58,13 @@ router.get("/:connection", function (req, res) {
  */
 router.get("/:connection/:database/collections", function (req, res) {
   db.getCollectionPromise(decodeURIComponent(req.params.connection), req.params.database)
-    .then(data => res.json(data));
+    .then(data => res.json(data))
+    .catch(err => res.render("index", {
+      title: "Mongo Explorer",
+      error: err,
+      readme: "https://github.com/jsbravo-sw/mongo-explorer/blob/master/README.md"
+    }));
+
 });
 
 /**
@@ -62,7 +73,13 @@ router.get("/:connection/:database/collections", function (req, res) {
  */
 router.get("/:connection/:database/collections/:collection", function (req, res) {
   db.getDocumentsPromise(decodeURIComponent(req.params.connection), req.params.database, req.params.collection)
-    .then(data => res.json(data));
+    .then(data => res.json(data))
+    .catch(err => res.render("index", {
+      title: "Mongo Explorer",
+      error: err,
+      readme: "https://github.com/jsbravo-sw/mongo-explorer/blob/master/README.md"
+    }));
+
 });
 
 /**
@@ -77,7 +94,13 @@ router.get("/:connection/:database/collections/:collection/:_id", function (req,
         res.json(data[0]);
       else
         res.json(data);
-    });
+    })
+    .catch(err => res.render("index", {
+      title: "Mongo Explorer",
+      error: err,
+      readme: "https://github.com/jsbravo-sw/mongo-explorer/blob/master/README.md"
+    }));
+
 });
 
 /**
@@ -87,7 +110,13 @@ router.get("/:connection/:database/collections/:collection/:_id", function (req,
  */
 router.post("/:connection/:database/collections/:collection/delete/:_id", function (req, res) {
   db.findAndDeleteOnePromise(decodeURIComponent(req.params.connection), req.params.database, req.params.collection, req.params._id)
-    .then(res.redirect(req.get("referer")));
+    .then(res.redirect(req.get("referer")))
+    .catch(err => res.render("index", {
+      title: "Mongo Explorer",
+      error: err,
+      readme: "https://github.com/jsbravo-sw/mongo-explorer/blob/master/README.md"
+    }));
+
 });
 
 /**
@@ -98,7 +127,13 @@ router.post("/:connection/:database/collections/:collection/delete/:_id", functi
  */
 router.post("/:connection/:database/collections/:collection/update/:_id", function (req, res) {
   db.findAndUpdateOnePromise(decodeURIComponent(req.params.connection), req.params.database, req.params.collection, req.params._id, req.body)
-    .then(res.redirect(req.get("referer")));
+    .then(res.redirect(req.get("referer")))
+    .catch(err => res.render("index", {
+      title: "Mongo Explorer",
+      error: err,
+      readme: "https://github.com/jsbravo-sw/mongo-explorer/blob/master/README.md"
+    }));
+
 });
 
 /**
@@ -109,7 +144,13 @@ router.post("/:connection/:database/collections/:collection/update/:_id", functi
  */
 router.post("/:connection/:database/collections/:collection/create/", function (req, res) {
   db.createOneDocumentPromise(decodeURIComponent(req.params.connection), req.params.database, req.params.collection, req.body)
-    .then(res.redirect(req.get("referer")));
+    .then(res.redirect(req.get("referer")))
+    .catch(err => res.render("index", {
+      title: "Mongo Explorer",
+      error: err,
+      readme: "https://github.com/jsbravo-sw/mongo-explorer/blob/master/README.md"
+    }));
+
 });
 
 module.exports = router;
